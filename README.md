@@ -1,30 +1,25 @@
-# neo4j-flask
-A microblog application written in Python powered by Flask and Neo4j. Extension of Flask's microblog tutorial, [Flaskr](http://flask.pocoo.org/docs/0.10/tutorial/).
+# ssh into ec2 instance
+sudo ssh -i /Users/r00t/Downloads/repp_dev.pem ubuntu@ec2-52-53-211-225.us-west-1.compute.amazonaws.com
 
-## Usage
+#create cloud9
+sudo docker run -d -v ~/:/workspace --name cloud9 -p 8181:8181 sapk/cloud9 --auth username:password
 
-Make sure [Neo4j](http://neo4j.com/download/other-releases/) is running first!
+#create neo4j database
+sudo docker run -i -t -d --name neo4j --cap-add=SYS_RESOURCE -p 7474:7474 tpires/neo4j
 
-**If you're on Neo4j >= 2.2, make sure to set environment variables `NEO4J_USERNAME` and `NEO4J_PASSWORD`
-to your username and password, respectively:**
+#create flask container
+sudo docker run -d --name flask -v /home/ubuntu/repp/blog:/var/www/app -p 80:80 p0bailey/docker-flask
+sudo docker run -d --name flask -v /home/ubuntu/repp:/var/www/neo4j -p 80:80 p0bailey/docker-flask
 
-```
-$ export NEO4J_USERNAME=username
-$ export NEO4J_PASSWORD=password
-```
+# attach to container
+sudo docker exec -it 5c9a6b12a51d bash
 
-Or, set `dbms.security.auth_enabled=false` in `conf/neo4j-server.properties`.
 
-Then:
+netstat -tulpn
 
-```
-git clone https://github.com/nicolewhite/neo4j-flask.git
-cd neo4j-flask
-pip install virtualenv
-virtualenv venv
-source venv/bin/activate
-pip install -r requirements.txt
-python run.py
-```
 
-[http://localhost:5000](http://localhost:5000)
+pip install py2neo
+sudo pip install passlib
+sudo pip install uwsgi
+pip install cryptography
+sudo -E pip install bcrypt
