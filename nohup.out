@@ -1,0 +1,5 @@
+ * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
+172.17.0.3 - - [23/Oct/2017 04:05:02] "GET / HTTP/1.1" 200 -
+172.17.0.3 - - [23/Oct/2017 04:05:10] "GET /register HTTP/1.1" 200 -
+172.17.0.3 - - [23/Oct/2017 04:05:14] "POST /register HTTP/1.1" 302 -
+172.17.0.3 - - [23/Oct/2017 04:05:14] "GET / HTTP/1.1" 200 -
