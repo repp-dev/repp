@@ -4,7 +4,7 @@ from datetime import datetime
 import os
 import uuid
 
-url = os.environ.get('GRAPHENEDB_URL', 'http://ec2-52-53-211-225.us-west-1.compute.amazonaws.com:7474/')
+url = os.environ.get('GRAPHENEDB_URL', 'http://repp.link:7474')
 username = "neo4j"
 password = "neo4jneo4j"
 
