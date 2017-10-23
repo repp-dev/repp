@@ -1,0 +1,5 @@
+sudo ssh -i /Users/r00t/Downloads/repp_dev.pem ubuntu@ec2-52-53-211-225.us-west-1.compute.amazonaws.com
+
+
+
+sudo docker run -d -v ~/:/workspace -p 8181:8181 sapk/cloud9 --auth username:password
