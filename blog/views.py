@@ -65,32 +65,59 @@ def add_post():
 
     return redirect(url_for('index'))
 
-@app.route('/like_post/<post_id>')
-def like_post(post_id):
-    username = session.get('username')
 
-    if not username:
-        flash('You must be logged in to like a post.')
-        return redirect(url_for('login'))
-
-    User(username).like_post(post_id)
-
-    flash('Liked post.')
-    return redirect(request.referrer)
-
-@app.route('/dislike_post/<post_id>')
-def dislike_post(post_id):
+@app.route('/rate_valid/<post_id>/<int:rating>')
+def rate_valid(post_id,rating ):
     username = session.get('username')
     
     if not username:
-        flash('You must be logged in to dislike a post.')
+        flash('You must be logged in to rate_valid a post.')
         return redirect(url_for('login'))
 
-    User(username).dislike_post(post_id)
+    User(username).rate_valid(post_id,rating)
 
-    flash('Liked post.')
-    flash('Disliked post.')
+    flash('rate_valid post.')
     return redirect(request.referrer)
+    
+@app.route('/rate_like/<post_id>/<int:rating>')
+def rate_like(post_id,rating ):
+    username = session.get('username')
+    
+    if not username:
+        flash('You must be logged in to rate_like a post.')
+        return redirect(url_for('login'))
+
+    User(username).rate_like(post_id,rating)
+
+    flash('rate_like post.')
+    return redirect(request.referrer)
+    
+@app.route('/rate_authenticity/<post_id>/<int:rating>')
+def rate_authenticity(post_id,rating ):
+    username = session.get('username')
+    
+    if not username:
+        flash('You must be logged in to rate_authenticity a post.')
+        return redirect(url_for('login'))
+
+    User(username).rate_authenticity(post_id,rating)
+
+    flash('rate_authenticity post.')
+    return redirect(request.referrer)
+
+@app.route('/rate_trust/<post_id>/<int:rating>')
+def rate_trust(post_id,rating ):
+    username = session.get('username')
+    
+    if not username:
+        flash('You must be logged in to rate_trust a post.')
+        return redirect(url_for('login'))
+
+    User(username).rate_trust(post_id,rating)
+
+    flash('rate_trust post.')
+    return redirect(request.referrer)
+
 
 @app.route('/profile/<username>')
 def profile(username):

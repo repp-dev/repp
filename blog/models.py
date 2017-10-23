@@ -53,46 +53,26 @@ class User:
 
             rel = Relationship(tag, 'TAGGED', post)
             graph.create(rel)
+    
+    def rate_authenticity(self, post_id,rating):
+        user = self.find()
+        post = graph.find_one('Post', 'id', post_id)
+        graph.merge(Relationship(user, 'RATED_AUTHENTICITY', post , rating = rating))
+    
+    def rate_valid(self, post_id,rating):
+        user = self.find()
+        post = graph.find_one('Post', 'id', post_id)
+        graph.merge(Relationship(user, 'RATED_VALID', post , rating = rating))
 
-    def trust_post(self, post_id):
+    def rate_like(self, post_id,rating):
         user = self.find()
         post = graph.find_one('Post', 'id', post_id)
-        graph.merge(Relationship(user, 'TRUSTED', post))
-    
-    def distrust_post(self, post_id):
+        graph.merge(Relationship(user, 'RATED_LIKE', post , rating = rating))
+
+    def rate_trust(self, post_id,rating):
         user = self.find()
         post = graph.find_one('Post', 'id', post_id)
-        graph.merge(Relationship(user, 'DISTRUSTED', post))
-    
-    def like_post(self, post_id):
-        user = self.find()
-        post = graph.find_one('Post', 'id', post_id)
-        graph.merge(Relationship(user, 'LIKED', post))
-    
-    def dislike_post(self, post_id):
-        user = self.find()
-        post = graph.find_one('Post', 'id', post_id)
-        graph.merge(Relationship(user, 'DISLIKED', post))
-    
-    def valid_post(self, post_id):
-        user = self.find()
-        post = graph.find_one('Post', 'id', post_id)
-        graph.merge(Relationship(user, 'VALID', post))
-    
-    def invalid_post(self, post_id):
-        user = self.find()
-        post = graph.find_one('Post', 'id', post_id)
-        graph.merge(Relationship(user, 'INVALID', post))
-    
-    def authenticate_post(self, post_id):
-        user = self.find()
-        post = graph.find_one('Post', 'id', post_id)
-        graph.merge(Relationship(user, 'AUTHENTICATE', post))
-    
-    def deauthenticate_post(self, post_id):
-        user = self.find()
-        post = graph.find_one('Post', 'id', post_id)
-        graph.merge(Relationship(user, 'DEAUTHENTICATE', post))
+        graph.merge(Relationship(user, 'RATED_TRUST', post , rating = rating))
 
     def get_recent_posts(self):
         query = '''

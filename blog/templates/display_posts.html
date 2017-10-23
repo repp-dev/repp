@@ -6,8 +6,27 @@
     	by <a href="{{ url_for('profile', username=row.username) }}">{{ row.username }}</a>
         {% endif %}
     	on {{ row.post.date }}
-    	<a href="{{ url_for('like_post', post_id=row.post.id) }}">like</a><br>
-      <a href="{{ url_for('dislike_post', post_id=row.post.id) }}">dislike</a><br>
+    	<br>
+    	<a href="{{ url_for('rate_like', post_id=row.post.id, rating =1) }}">Like 1</a>
+    	<a href="{{ url_for('rate_like', post_id=row.post.id, rating =2) }}">Like 2</a>
+    	<a href="{{ url_for('rate_like', post_id=row.post.id, rating =3) }}">Like 3</a>
+    	<a href="{{ url_for('rate_like', post_id=row.post.id, rating =4) }}">Like 4</a>
+    	<a href="{{ url_for('rate_like', post_id=row.post.id, rating =5) }}">Like 5</a><br>
+      <a href="{{ url_for('rate_valid', post_id=row.post.id, rating=1) }}">Valid 1</a>
+      <a href="{{ url_for('rate_valid', post_id=row.post.id, rating=2) }}">Valid 2</a>
+      <a href="{{ url_for('rate_valid', post_id=row.post.id, rating=3) }}">Valid 3</a>
+      <a href="{{ url_for('rate_valid', post_id=row.post.id, rating=4) }}">Valid 4</a>
+      <a href="{{ url_for('rate_valid', post_id=row.post.id, rating=5) }}">Valid 5</a><br>
+      <a href="{{ url_for('rate_trust', post_id=row.post.id, rating=1) }}">Trust 1</a>
+      <a href="{{ url_for('rate_trust', post_id=row.post.id, rating=2) }}">Trust 2</a>
+      <a href="{{ url_for('rate_trust', post_id=row.post.id, rating=3) }}">Trust 3</a>
+      <a href="{{ url_for('rate_trust', post_id=row.post.id, rating=4) }}">Trust 4</a>
+      <a href="{{ url_for('rate_trust', post_id=row.post.id, rating=5) }}">Trust 5</a><br>
+      <a href="{{ url_for('rate_authenticity', post_id=row.post.id, rating=1) }}">Authenticity 1</a>
+      <a href="{{ url_for('rate_authenticity', post_id=row.post.id, rating=2) }}">Authenticity 2</a>
+      <a href="{{ url_for('rate_authenticity', post_id=row.post.id, rating=3) }}">Authenticity 3</a>
+      <a href="{{ url_for('rate_authenticity', post_id=row.post.id, rating=4) }}">Authenticity 4</a>
+      <a href="{{ url_for('rate_authenticity', post_id=row.post.id, rating=5) }}">Authenticity 5</a><br>
     	<i>{{ ", ".join(row.tags) }}</i><br>
     	{{ row.post.text }}
   {% else %}
