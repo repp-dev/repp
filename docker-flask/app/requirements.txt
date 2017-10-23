@@ -1,0 +1,5 @@
+uwsgi 
+flask
+py2neo
+passlib
+pycparser
