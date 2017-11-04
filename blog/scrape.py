@@ -28,7 +28,7 @@ def register(username, password):
         except Exception, e:
             print "alreay have user: "+username
             
-hashtagsToScrape = ["politics","metoo","apple"]
+hashtagsToScrape = ["politics","metoo","apple", "trump"]
 for tagToScrape in hashtagsToScrape:
     results = twitter.search.tweets(q=tagToScrape)
         
@@ -36,6 +36,9 @@ for tagToScrape in hashtagsToScrape:
     
         tweetText = tweet['text'].encode('utf-8')
         tweetAuthor = tweet['user']['screen_name'].encode('utf-8')
+        language = tweet['user']['lang'].encode('utf-8')
+        if language != "en":
+            continue
         if 'http' in tweetText:
             continue
     
@@ -57,7 +60,7 @@ for tagToScrape in hashtagsToScrape:
         except Exception, e:
             continue
     
-        print "New Tweet: "+tweetAuthor+":"+tweetText
+        print "New Tweet ("+language+"): "+tweetAuthor+":"+tweetText
         for hashtag in tweet['entities']['hashtags']:
             tag = Node('Tag', name=hashtag['text'])
             graph.merge(tag)
