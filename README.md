@@ -1,5 +1,5 @@
 # ssh into ec2 instance
-sudo ssh -i /Users/r00t/Downloads/repp_dev.pem ubuntu@ec2-52-53-211-225.us-west-1.compute.amazonaws.com
+ssh -i /Users/r00t/Downloads/repp_norcal.pem ubuntu@ec2-54-153-107-211.us-west-1.compute.amazonaws.com
 
 # nginx proxy
 sudo docker run -d -p 80:80 --name proxy -e DEFAULT_HOST=repp.link -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy
@@ -15,6 +15,3 @@ sudo docker run -d --name flask -v /home/ubuntu/repp:/var/www/neo4j -e VIRTUAL_H
 
 # attach to container
 sudo docker exec -it flask bash
-
-# determine process number using port 80
-netstat -tulpn
