@@ -119,7 +119,7 @@ def get_todays_recent_posts():
     MATCH (user:User)-[:PUBLISHED]->(post:Post)<-[:TAGGED]-(tag:Tag)
     WHERE post.date = {today}
     RETURN user.username AS username, post, COLLECT(tag.name) AS tags
-    ORDER BY post.timestamp DESC LIMIT 50
+    ORDER BY post.timestamp DESC LIMIT 200
     '''
 
     return graph.run(query, today=date())
