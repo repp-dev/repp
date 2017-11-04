@@ -3,3 +3,4 @@ flask
 py2neo
 passlib
 pycparser
+twitter
