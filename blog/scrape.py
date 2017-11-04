@@ -24,15 +24,21 @@ def date():
     
 user = graph.find_one('User', 'username','nyt')
 
-for post in results['statuses']:
-    print post['user']['screen_name'].encode('utf-8')
+for tweet in results['statuses']:
+    print tweet['user']['screen_name'].encode('utf-8')
     post = Node(
             'Post',
             id=str(uuid.uuid4()),
-            title=post['user']['screen_name'].encode('utf-8'),
-            text=post['text'].encode('utf-8'),
+            title=tweet['user']['screen_name'].encode('utf-8'),
+            text=tweet['text'].encode('utf-8'),
             timestamp=timestamp(),
             date=date()
         )
     rel = Relationship(user, 'PUBLISHED', post)
-    graph.create(rel)    
+    graph.create(rel)   
+    
+    for hashtag in tweet['entities']['hashtags']:
+        tag = Node('Tag', name=hashtag['text'])
+        graph.merge(tag)
+        rel = Relationship(tag, 'TAGGED', post)
+        graph.create(rel)
