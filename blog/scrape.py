@@ -47,14 +47,7 @@ for tagToScrape in hashtagsToScrape:
         register(tweetAuthor, tweetAuthor+tweetAuthor)
         user = graph.find_one('User', 'username',tweetAuthor)
         
-        post = Node(
-            'Post',
-            id=tweet['id'],
-            title="Tweet",
-            text=tweetText,
-            timestamp=timestamp(),
-            date=date()
-        )
+        post = Node('Post', id=tweet['id'], title="Tweet", text=tweetText, timestamp=timestamp(), date=date())
         rel = Relationship(user, 'PUBLISHED', post)
     
         try:

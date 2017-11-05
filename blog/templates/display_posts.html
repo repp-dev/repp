@@ -8,26 +8,56 @@
     	<br>
     	<font size="12">{{ row.post.text }}</font>
     	<br>
-    	<a href="{{ url_for('rate_like', post_id=row.post.id, rating =1) }}">Like 1</a>
-    	<a href="{{ url_for('rate_like', post_id=row.post.id, rating =2) }}">Like 2</a>
-    	<a href="{{ url_for('rate_like', post_id=row.post.id, rating =3) }}">Like 3</a>
-    	<a href="{{ url_for('rate_like', post_id=row.post.id, rating =4) }}">Like 4</a>
-    	<a href="{{ url_for('rate_like', post_id=row.post.id, rating =5) }}">Like 5</a><br>
-      <a href="{{ url_for('rate_valid', post_id=row.post.id, rating=1) }}">Valid 1</a>
-      <a href="{{ url_for('rate_valid', post_id=row.post.id, rating=2) }}">Valid 2</a>
-      <a href="{{ url_for('rate_valid', post_id=row.post.id, rating=3) }}">Valid 3</a>
-      <a href="{{ url_for('rate_valid', post_id=row.post.id, rating=4) }}">Valid 4</a>
-      <a href="{{ url_for('rate_valid', post_id=row.post.id, rating=5) }}">Valid 5</a><br>
-      <a href="{{ url_for('rate_trust', post_id=row.post.id, rating=1) }}">Trust 1</a>
-      <a href="{{ url_for('rate_trust', post_id=row.post.id, rating=2) }}">Trust 2</a>
-      <a href="{{ url_for('rate_trust', post_id=row.post.id, rating=3) }}">Trust 3</a>
-      <a href="{{ url_for('rate_trust', post_id=row.post.id, rating=4) }}">Trust 4</a>
-      <a href="{{ url_for('rate_trust', post_id=row.post.id, rating=5) }}">Trust 5</a><br>
-      <a href="{{ url_for('rate_authenticity', post_id=row.post.id, rating=1) }}">Authenticity 1</a>
-      <a href="{{ url_for('rate_authenticity', post_id=row.post.id, rating=2) }}">Authenticity 2</a>
-      <a href="{{ url_for('rate_authenticity', post_id=row.post.id, rating=3) }}">Authenticity 3</a>
-      <a href="{{ url_for('rate_authenticity', post_id=row.post.id, rating=4) }}">Authenticity 4</a>
-      <a href="{{ url_for('rate_authenticity', post_id=row.post.id, rating=5) }}">Authenticity 5</a><br>
+    	
+    <table style="width:100%">
+      <tr style="background-color:#E6E6FA">
+        <form action="{{ url_for('rate_like', post_id=row.post.id, rating =2) }}" method="get">
+          <td><input name = "like" type="radio" value="1"> Strongly Dislike</td>
+          <td><input name = "like" type="radio" value="2"> Dislike</td>
+          <td><input name = "like" type="radio" value="3"> Neutral or N/A</td>
+          <td><input name = "like" type="radio" value="4"> Like</td>
+          <td><input name = "like" type="radio" value="5"> Strongly Like</td>
+          <td><input type="submit" value="Submit">
+        </form>
+      </tr>
+  
+      <tr>
+         <form action="{{ url_for('rate_valid', post_id=row.post.id, rating=1) }}" method="get">
+           <td> <input name = "validity" type="radio" value="1"> Very Invalid</td>
+           <td> <input name = "validity" type="radio" value="2"> Invalid</td>
+           <td> <input name = "validity" type="radio" value="3"> Neutral or N/A</td>
+           <td> <input name = "validity" type="radio" value="4"> Valid</td>
+           <td> <input name = "validity" type="radio" value="5"> Very Valid</td>
+           <td><input type="submit" value="Submit"></td>
+        </form>
+      </tr>
+      
+      <tr style="background-color:#E6E6FA">
+         <form action="{{ url_for('rate_trust', post_id=row.post.id, rating=1) }}" method="get">
+           <td>   <input name = "trust" type="radio" value="1"> Extremely Untrustworthey</td>
+           <td>  <input name = "trust" type="radio"value="2"> Untrustworthey</td>
+           <td>   <input name = "trust" type="radio"value="3"> Neutral or N/A</td>
+           <td>  <input name = "trust" type="radio"value="4"> Trustworthey</td>
+           <td>  <input name = "trust" type="radio"value="5"> Extremely Trustworthey</td>
+           <td><input type="submit" value="Submit"></td>
+         </form>
+      </tr>
+  
+      <tr>
+        <form action="{{ url_for('rate_authenticity', post_id=row.post.id, rating=1) }}" method="get">
+          <td>    <input name = "authenticity" type="radio" value="1"> Extremely Inauthentic</td>
+          <td>    <input name = "authenticity" type="radio" value="2"> Inauthentic</td>
+          <td>   <input name = "authenticity" type="radio" value="3"> Neutral or N/A</td>
+          <td>   <input name = "authenticity" type="radio" value="4"> Authentic</td>
+          <td>   <input name = "authenticity" type="radio" value="5"> Extremely Authentic</td>
+          <td><input type="submit" value="Submit"></td>
+        </form>
+      </tr>
+      
+    </table>
+
+
+    	
     	<i>{{ ", ".join(row.tags) }}</i><br>
     	<HR COLOR="purple" SIZE="6">
   {% else %}
