@@ -1,4 +1,9 @@
+
   <ul class="posts">
+    <script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+  </script>
+   
   {% for row in posts %}
     <li>
     	<b>{{ row.post.title }}</b>
@@ -8,50 +13,90 @@
     	<br>
     	<font size="12">{{ row.post.text }}</font>
     	<br>
-    	
+
     <table style="width:100%">
       <tr style="background-color:#E6E6FA">
-        <form action="{{ url_for('rate_like', post_id=row.post.id, rating =2) }}" method="get">
-          <td><input name = "like" type="radio" value="1"> Strongly Dislike</td>
-          <td><input name = "like" type="radio" value="2"> Dislike</td>
-          <td><input name = "like" type="radio" value="3"> Neutral or N/A</td>
-          <td><input name = "like" type="radio" value="4"> Like</td>
-          <td><input name = "like" type="radio" value="5"> Strongly Like</td>
-          <td><input type="submit" value="Submit">
+        <form>
+          <td><input name = "like{{row.post.id}}" type="radio" value="1"> Strongly Dislike</td>
+          <td><input name = "like{{row.post.id}}" type="radio" value="2"> Dislike</td>
+          <td><input name = "like{{row.post.id}}" type="radio" value="3"> Neutral or N/A</td>
+          <td><input name = "like{{row.post.id}}" type="radio" value="4"> Like</td>
+          <td><input name = "like{{row.post.id}}" type="radio" value="5"> Strongly Like</td>
         </form>
+        <script>
+          $("input[name=like{{row.post.id}}]").change(function(){
+               $.getJSON($SCRIPT_ROOT + '/rate_like', {
+                post_id: "{{row.post.id}}",
+                rating: this.value
+            }, function(data) {
+        $("#result").text(data.result);
+            });
+            return false;
+          });
+        </script>
       </tr>
   
       <tr>
-         <form action="{{ url_for('rate_valid', post_id=row.post.id, rating=1) }}" method="get">
-           <td> <input name = "validity" type="radio" value="1"> Very Invalid</td>
-           <td> <input name = "validity" type="radio" value="2"> Invalid</td>
-           <td> <input name = "validity" type="radio" value="3"> Neutral or N/A</td>
-           <td> <input name = "validity" type="radio" value="4"> Valid</td>
-           <td> <input name = "validity" type="radio" value="5"> Very Valid</td>
-           <td><input type="submit" value="Submit"></td>
+         <form>
+           <td> <input name = "validity{{row.post.id}}" type="radio" value="1"> Very Invalid</td>
+           <td> <input name = "validity{{row.post.id}}"  type="radio" value="2"> Invalid</td>
+           <td> <input name = "validity{{row.post.id}}"  type="radio" value="3"> Neutral or N/A</td>
+           <td> <input name = "validity{{row.post.id}}"  type="radio" value="4"> Valid</td>
+           <td> <input name = "validity{{row.post.id}}"  type="radio" value="5"> Very Valid</td>
         </form>
+        <script>
+          $("input[name=validity{{row.post.id}}]").change(function(){
+               $.getJSON($SCRIPT_ROOT + '/rate_valid', {
+                post_id: "{{row.post.id}}",
+                rating: this.value
+            }, function(data) {
+        $("#result").text(data.result);
+            });
+            return false;
+          });
+        </script>
       </tr>
       
       <tr style="background-color:#E6E6FA">
-         <form action="{{ url_for('rate_trust', post_id=row.post.id, rating=1) }}" method="get">
-           <td>   <input name = "trust" type="radio" value="1"> Extremely Untrustworthey</td>
-           <td>  <input name = "trust" type="radio"value="2"> Untrustworthey</td>
-           <td>   <input name = "trust" type="radio"value="3"> Neutral or N/A</td>
-           <td>  <input name = "trust" type="radio"value="4"> Trustworthey</td>
-           <td>  <input name = "trust" type="radio"value="5"> Extremely Trustworthey</td>
-           <td><input type="submit" value="Submit"></td>
+         <form>
+           <td>   <input name = "trust{{row.post.id}}" type="radio" value="1"> Extremely Untrustworthey</td>
+           <td>  <input name = "trust{{row.post.id}}" type="radio"value="2"> Untrustworthey</td>
+           <td>   <input name = "trust{{row.post.id}}" type="radio"value="3"> Neutral or N/A</td>
+           <td>  <input name = "trust{{row.post.id}}" type="radio"value="4"> Trustworthey</td>
+           <td>  <input name = "trust{{row.post.id}}" type="radio"value="5"> Extremely Trustworthey</td>
          </form>
+         <script>
+          $("input[name=trust{{row.post.id}}]").change(function(){
+               $.getJSON($SCRIPT_ROOT + '/rate_trust', {
+                post_id: "{{row.post.id}}",
+                rating: this.value
+            }, function(data) {
+        $("#result").text(data.result);
+            });
+            return false;
+          });
+        </script>
       </tr>
   
       <tr>
-        <form action="{{ url_for('rate_authenticity', post_id=row.post.id, rating=1) }}" method="get">
-          <td>    <input name = "authenticity" type="radio" value="1"> Extremely Inauthentic</td>
-          <td>    <input name = "authenticity" type="radio" value="2"> Inauthentic</td>
-          <td>   <input name = "authenticity" type="radio" value="3"> Neutral or N/A</td>
-          <td>   <input name = "authenticity" type="radio" value="4"> Authentic</td>
-          <td>   <input name = "authenticity" type="radio" value="5"> Extremely Authentic</td>
-          <td><input type="submit" value="Submit"></td>
+        <form>
+          <td>    <input name = "authenticity{{row.post.id}}" type="radio" value="1"> Extremely Inauthentic</td>
+          <td>    <input name = "authenticity{{row.post.id}}" type="radio" value="2"> Inauthentic</td>
+          <td>   <input name = "authenticity{{row.post.id}}" type="radio" value="3"> Neutral or N/A</td>
+          <td>   <input name = "authenticity{{row.post.id}}" type="radio" value="4"> Authentic</td>
+          <td>   <input name = "authenticity{{row.post.id}}" type="radio" value="5"> Extremely Authentic</td>
         </form>
+        <script>
+          $("input[name=authenticity{{row.post.id}}]").change(function(){
+               $.getJSON($SCRIPT_ROOT + '/rate_authenticity', {
+                post_id: "{{row.post.id}}",
+                rating: this.value
+            }, function(data) {
+        $("#result").text(data.result);
+            });
+            return false;
+          });
+        </script>
       </tr>
       
     </table>

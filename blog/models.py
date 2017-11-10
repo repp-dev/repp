@@ -121,7 +121,7 @@ def get_todays_recent_posts():
     RETURN user.username AS username, post, COLLECT(tag.name) AS tags
     ORDER BY post.timestamp DESC LIMIT 200
     '''
-
+    print('getting front page content')
     return graph.run(query, today=date())
 
 def timestamp():
