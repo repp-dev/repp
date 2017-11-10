@@ -76,18 +76,18 @@ class User:
 
     def get_recent_posts(self):
         query = '''
-        MATCH (user:User)-[:PUBLISHED]->(post:Post)<-[:TAGGED]-(tag:Tag)
+        MATCH (user:User)-[:PUBLISHED]->(post:Post)
         WHERE user.username = {username}
-        RETURN post, COLLECT(tag.name) AS tags
-        ORDER BY post.timestamp DESC LIMIT 5
+        RETURN post
+        ORDER BY post.timestamp
         '''
 
         return graph.run(query, username=self.username)
 
 def get_posts():
     query = '''
-    MATCH (user:User)-[:PUBLISHED]->(post:Post)<-[:TAGGED]-(tag:Tag)
-    RETURN user.username AS username, post, COLLECT(tag.name) AS tags
+    MATCH (user:User)-[:PUBLISHED]->(post:Post)
+    RETURN user.username AS username, post
     ORDER BY post.timestamp DESC LIMIT 200
     '''
     print('getting front page content')

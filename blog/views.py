@@ -65,12 +65,6 @@ def add_post():
 
     return redirect(url_for('index'))
 
-@app.route('/_add_numbers')
-def add_numbers():
-    a = request.args.get('a', 0, type=int)
-    b = request.args.get('b', 0, type=int)
-    return jsonify(result=a + b)
-
 @app.route('/rate_valid')
 def rate_valid():
     username = session.get('username')
@@ -132,16 +126,11 @@ def profile(username):
     user_being_viewed = User(user_being_viewed_username)
     posts = user_being_viewed.get_recent_posts()
 
-    similar = []
-    common = []
-
     if logged_in_username:
         logged_in_user = User(logged_in_username)
 
     return render_template(
         'profile.html',
         username=username,
-        posts=posts,
-        similar=similar,
-        common=common
+        posts=posts
     )

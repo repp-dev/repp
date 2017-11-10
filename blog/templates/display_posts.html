@@ -1,8 +1,8 @@
 
   <ul class="posts">
     <script type=text/javascript>
-  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-  </script>
+         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
    
   {% for row in posts %}
     <li>
@@ -100,10 +100,6 @@
       </tr>
       
     </table>
-
-
-    	
-    	<i>{{ ", ".join(row.tags) }}</i><br>
     	<HR COLOR="purple" SIZE="6">
   {% else %}
     <li>There aren't any posts yet!
