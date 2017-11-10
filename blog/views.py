@@ -1,11 +1,11 @@
-from .models import User, get_todays_recent_posts
+from .models import User, get_posts
 from flask import Flask, request, session, redirect, url_for, render_template, flash
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    posts = get_todays_recent_posts()
+    posts = get_posts()
     return render_template('index.html', posts=posts)
 
 @app.route('/register', methods=['GET','POST'])
@@ -137,11 +137,6 @@ def profile(username):
 
     if logged_in_username:
         logged_in_user = User(logged_in_username)
-
-        if logged_in_user.username == user_being_viewed.username:
-            similar = logged_in_user.get_similar_users()
-        else:
-            common = logged_in_user.get_commonality_of_user(user_being_viewed)
 
     return render_template(
         'profile.html',
