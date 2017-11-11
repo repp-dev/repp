@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     username = session.get('username')
-    posts = get_posts()
+    posts = get_posts(username)
     return render_template('index.html', posts=posts)
 
 @app.route('/register', methods=['GET','POST'])

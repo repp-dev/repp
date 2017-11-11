@@ -1,8 +1,10 @@
+from __future__ import print_function
 from py2neo import Graph, Node, Relationship
 from passlib.hash import bcrypt
 from datetime import datetime
 import os
 import uuid
+import sys
 
 url = os.environ.get('GRAPHENEDB_URL', 'http://repp.link:7474')
 username = "neo4j"
@@ -84,17 +86,12 @@ class User:
 
         return graph.run(query, username=self.username)
 
-def get_posts():
-    query = '''
-    MATCH (user:User)-[:PUBLISHED]->(post:Post)
-    OPTIONAL MATCH (:User{ username: '{username}' })-[trust:RATED_TRUST]->(post)
-    OPTIONAL MATCH (:User{ username: '{username}' })-[like:RATED_LIKE]->(post)
-    OPTIONAL MATCH (:User{ username: '{username}' })-[authenticity:RATED_AUTHENTICITY]->(post)
-    OPTIONAL MATCH (:User{ username: '{username}' })-[valid:RATED_VALID]->(post)
-    RETURN user.username AS username, post, trust, like, authenticity, valid
-    ORDER BY post.timestamp DESC LIMIT 200
-    '''
+def get_posts(user):
+    query = "MATCH (user:User)-[:PUBLISHED]->(post:Post)  OPTIONAL MATCH (:User{ username: '%s' })-[trust:RATED_TRUST]->(post) OPTIONAL MATCH (:User{ username: '%s' })-[like:RATED_LIKE]->(post) OPTIONAL MATCH (:User{ username: '%s' })-[authenticity:RATED_AUTHENTICITY]->(post) OPTIONAL MATCH (:User{ username: '%s' })-[valid:RATED_VALID]->(post) RETURN user.username AS username, post, trust, like, authenticity, valid ORDER BY post.timestamp DESC LIMIT 200" % (user, user, user, user)
+    
     print('getting front page content')
+    print(user, file=sys.stderr)
+    print(query, file=sys.stderr)
     return graph.run(query, today=date())
 
 def timestamp():
