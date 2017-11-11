@@ -5,7 +5,14 @@ import os
 import uuid
 from twitter import *
 twitter = Twitter(auth=OAuth("3432967618-K5tO2Vgwo61DNQAV8SPDCj9Uujk6mVNHIByGXQq", "iR4ZdwnikQnMiyTZMZ3PB614pDenqvmHEK7sHSgGnv0sJ", "yYu1Fst9rhsv0HeeZnIMhIu0d", "VFEHtj9yynT3htQ1K4w8xa2cGCLahXNz57k0w2cGkMcrNoz8Cr"))
-    
+
+hashtagsToScrape = []
+trendResults = twitter.trends.place(_id = 23424975)[0]['trends']
+for trendingTag in trendResults:
+    hashtagsToScrape.append(trendingTag['name'])
+
+print hashtagsToScrape
+
 url = os.environ.get('GRAPHENEDB_URL', 'http://repp.link:7474')
 username = "neo4j"
 password = "neo4jneo4j"
@@ -28,7 +35,7 @@ def register(username, password):
         except Exception, e:
             print "alreay have user: "+username
             
-hashtagsToScrape = ["pubg","cern","ligo","blacktwitter","politics","metoo","apple", "trump","fail","noko","fascist","DNC","RNC","fintech","blockchain","bitcoin","ether"]
+
 for tagToScrape in hashtagsToScrape:
     results = twitter.search.tweets(q=tagToScrape)
         
