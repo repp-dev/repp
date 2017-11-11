@@ -87,7 +87,11 @@ class User:
 def get_posts():
     query = '''
     MATCH (user:User)-[:PUBLISHED]->(post:Post)
-    RETURN user.username AS username, post
+    OPTIONAL MATCH (:User{ username: 'bruce' })-[trust:RATED_TRUST]->(post)
+    OPTIONAL MATCH (:User{ username: 'bruce' })-[like:RATED_LIKE]->(post)
+    OPTIONAL MATCH (:User{ username: 'bruce' })-[authenticity:RATED_AUTHENTICITY]->(post)
+    OPTIONAL MATCH (:User{ username: 'bruce' })-[valid:RATED_VALID]->(post)
+    RETURN user.username AS username, post, trust, like, authenticity,valid
     ORDER BY post.timestamp DESC LIMIT 200
     '''
     print('getting front page content')

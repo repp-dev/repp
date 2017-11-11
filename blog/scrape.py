@@ -28,7 +28,7 @@ def register(username, password):
         except Exception, e:
             print "alreay have user: "+username
             
-hashtagsToScrape = ["politics","metoo","apple", "trump","fail","noko","fascist","DNC","RNC","finebaka"]
+hashtagsToScrape = ["politics","metoo","apple", "trump","fail","noko","fascist","DNC","RNC"]
 for tagToScrape in hashtagsToScrape:
     results = twitter.search.tweets(q=tagToScrape)
         
