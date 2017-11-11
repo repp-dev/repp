@@ -76,7 +76,6 @@ def rate_valid():
 
     User(username).rate_valid(request.args.get('post_id', 0, type=int),request.args.get('rating', 0, type=int))
 
-    flash('rate_valid post.')
     return redirect(request.referrer)
     
 @app.route('/rate_like')
@@ -89,7 +88,6 @@ def rate_like():
 
     User(username).rate_like(request.args.get('post_id', 0, type=int),request.args.get('rating', 0, type=int))
 
-    flash('rate_like post.')
     return redirect(request.referrer)
     
 @app.route('/rate_authenticity')
@@ -102,7 +100,6 @@ def rate_authenticity():
 
     User(username).rate_authenticity(request.args.get('post_id', 0, type=int),request.args.get('rating', 0, type=int))
 
-    flash('rate_authenticity post.')
     return redirect(request.referrer)
 
 @app.route('/rate_trust')
@@ -115,7 +112,6 @@ def rate_trust():
 
     User(username).rate_trust(request.args.get('post_id', 0, type=int),request.args.get('rating', 0, type=int))
 
-    flash('rate_trust post.')
     return redirect(request.referrer)
 
 
