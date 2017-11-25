@@ -6,7 +6,7 @@ import os
 import uuid
 import sys
 
-url = os.environ.get('GRAPHENEDB_URL', 'http://repp.link:7474')
+url = os.environ.get('GRAPHENEDB_URL', 'http://neo4j')
 username = "neo4j"
 password = "neo4jneo4j"
 

@@ -11,7 +11,7 @@ sudo docker run -d -v ~/:/workspace --name cloud9 -e VIRTUAL_HOST=cloud9.repp.li
 sudo docker run -i -t -d --name neo4j --cap-add=SYS_RESOURCE -e VIRTUAL_HOST=neo4j.repp.link -p 7474:7474 -v /home/ubuntu/neo4j/:/var/lib/neo4j/data -e NEO4J_AUTH=neo4j:neo4jneo4j tpires/neo4j
 
 # create flask container
-sudo docker run -d --name flask -v /home/ubuntu/repp:/var/www/neo4j -e VIRTUAL_HOST=app.repp.link repp/flask
+sudo docker run -d --name flask -v /home/ubuntu/repp:/var/www/neo4j --link neo4j:neo4j -e VIRTUAL_HOST=app.repp.link repp/flask
 
 # attach to python server
 sudo docker exec -it flask bash
