@@ -13,7 +13,7 @@ for trendingTag in trendResults:
 
 print hashtagsToScrape
 
-url = os.environ.get('GRAPHENEDB_URL', 'http://repp.link:7474')
+url = os.environ.get('GRAPHENEDB_URL', 'http://neo4j')
 username = "neo4j"
 password = "neo4jneo4j"
 
@@ -54,7 +54,7 @@ for tagToScrape in hashtagsToScrape:
         register(tweetAuthor, tweetAuthor+tweetAuthor)
         user = graph.find_one('User', 'username',tweetAuthor)
         
-        post = Node('Post', id=tweet['id'], title="Tweet", text=tweetText, timestamp=timestamp(), date=date())
+        post = Node('Post', id=tweet['id'], title="Tweet", author=tweetAuthor,text=tweetText, timestamp=timestamp(), date=date())
         rel = Relationship(user, 'PUBLISHED', post)
     
         try:
